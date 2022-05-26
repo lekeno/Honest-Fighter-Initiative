@@ -342,10 +342,9 @@
             // pnlHeader
             // 
             this.pnlHeader.Controls.Add(this.pictureBox1);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(242, 53);
+            this.pnlHeader.Size = new System.Drawing.Size(242, 55);
             this.pnlHeader.TabIndex = 0;
             // 
             // pictureBox1
@@ -354,7 +353,7 @@
             this.pictureBox1.Image = global::HonestFighterInitiative.Properties.Resources.LogoEmojiWithFont;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(133, 53);
+            this.pictureBox1.Size = new System.Drawing.Size(133, 55);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -370,7 +369,8 @@
             this.Controls.Add(this.tlpInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormOverlay";
-            this.Text = "HonestFighterInitiative - Overlay";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "HonestFighterInitiative";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Transparent;
             this.tlpInfo.ResumeLayout(false);

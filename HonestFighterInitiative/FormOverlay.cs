@@ -47,6 +47,13 @@ namespace HonestFighterInitiative
             this.BackColor = Color.Black;
             this.TransparencyKey = this.BackColor;
 
+            #region StartPosition
+
+            Rectangle workingArea = Screen.GetWorkingArea(this);
+            this.Location = new Point(workingArea.Left, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height*0.1)));
+
+            #endregion
+
             #region Timers
 
             timer_ping_de.Elapsed += Timer_ping_de_Elapsed;
