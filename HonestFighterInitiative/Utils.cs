@@ -5,8 +5,10 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -73,6 +75,33 @@ namespace HonestFighterInitiative
                         break;
                     default:
                         break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+
+            return result;
+        }
+
+        internal static DateTime? GetUtcTimeFromServer()
+        {
+            DateTime? result = null;
+
+            try
+            {
+                using (var _client = new HttpClient())
+                {
+                    string response = _client.GetStringAsync("http://worldtimeapi.org/api/timezone/Etc/UTC").Result;
+                    string dts = Regex.Match(response, "\"unixtime\":(.*?),").Groups[1].Value;
+                    
+                    long unixTS = Convert.ToInt64(dts);
+
+                    System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                    dtDateTime = dtDateTime.AddSeconds(unixTS);
+
+                    result = dtDateTime;
                 }
             }
             catch (Exception ex)
