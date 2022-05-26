@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,8 @@ namespace HonestFighterInitiative
         System.Timers.Timer timer_ping_usw = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_use = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_au = new System.Timers.Timer(pingInterval);
+
+        System.Timers.Timer timer_clock = new System.Timers.Timer(1000);
 
         [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
         private static extern int SetWindowLong(HandleRef hWnd, int nIndex, int dwNewLong);
@@ -54,6 +57,9 @@ namespace HonestFighterInitiative
 
             #endregion
 
+            var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+            lbl_SerialNumber.Text = $"{assemblyVersion.Major}.{assemblyVersion.Minor}.{assemblyVersion.Build}.{assemblyVersion.Revision}";
+
             #region Timers
 
             timer_ping_de.Elapsed += Timer_ping_de_Elapsed;
@@ -62,11 +68,14 @@ namespace HonestFighterInitiative
             timer_ping_use.Elapsed += Timer_ping_use_Elapsed;
             timer_ping_au.Elapsed += Timer_ping_au_Elapsed;
 
+            timer_clock.Elapsed += Timer_clock_Elapsed;
+
             timer_ping_de.AutoReset = true;
             timer_ping_uk.AutoReset = true;
             timer_ping_usw.AutoReset = true;
             timer_ping_use.AutoReset = true;
             timer_ping_au.AutoReset = true;
+            timer_clock.AutoReset = true;
 
             timer_ping_de.Start();
             timer_ping_uk.Start();
@@ -74,7 +83,26 @@ namespace HonestFighterInitiative
             timer_ping_use.Start();
             timer_ping_au.Start();
 
+            timer_clock.Start();
+
             #endregion
+        }
+
+        private void Timer_clock_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                DateTime dateTime = DateTime.UtcNow;
+                
+                this.Invoke(new Action(() =>
+                {
+                    lbl_Clock.Text = dateTime.ToString("HH:mm:ss");
+                }));
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
         }
 
         private async void Timer_ping_au_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
