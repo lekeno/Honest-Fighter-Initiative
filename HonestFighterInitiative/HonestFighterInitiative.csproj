@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\LogoEmojiWithFont.png" />
+    <Content Include="assets\spearlogov2_200x200.png" />
     <Content Include="LogoEmoji.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -109,6 +109,11 @@ namespace HonestFighterInitiative
                 this.Invoke(new Action(() =>
                 {
                     lbl_Clock.Text = currentDateTimeUtc.ToString("HH:mm:ss");
+
+                    if (pcb_SpearLogo.Visible == true)
+                    {
+                        pcb_SpearLogo.Visible = false;
+                    }
                 }));
             }
             catch (Exception ex)
