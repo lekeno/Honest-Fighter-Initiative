@@ -14,6 +14,7 @@ namespace HonestFighterInitiative
     {
         internal static void Text_Paint(object sender, PaintEventArgs e)
         {
+            //Clean paint
             try
             {
                 e.Graphics.Clear(((Control)sender).BackColor);
