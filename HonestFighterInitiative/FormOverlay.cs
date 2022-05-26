@@ -17,7 +17,7 @@ namespace HonestFighterInitiative
     public partial class FormOverlay : Form
     {
         const double pingInterval = 1000;
-        const int jitter_latency_samples_count = 5;
+        const int jitter_latency_samples_count = 15;
         const int line_max_char_count = 20;
 
         System.Timers.Timer timer_ping_de = new System.Timers.Timer(pingInterval);
@@ -53,7 +53,7 @@ namespace HonestFighterInitiative
             #region StartPosition
 
             Rectangle workingArea = Screen.GetWorkingArea(this);
-            this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height*0.2)));
+            this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height*0.3)));
 
             #endregion
 
