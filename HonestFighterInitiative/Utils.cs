@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -94,8 +95,15 @@ namespace HonestFighterInitiative
             {
                 using (var _client = new HttpClient())
                 {
-                    JObject response = JObject.Parse(_client.GetStringAsync("http://worldtimeapi.org/api/timezone/Etc/UTC").Result);
-                    result = response["utc_datetime"]?.Value<DateTime>().ToUniversalTime();
+                    string response = _client.GetStringAsync("http://worldtimeapi.org/api/timezone/Etc/UTC").Result;
+                    string dts = Regex.Match(response, "\"unixtime\":(.*?),").Groups[1].Value;
+                    
+                    long unixTS = Convert.ToInt64(dts);
+
+                    System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                    dtDateTime = dtDateTime.AddSeconds(unixTS);
+
+                    result = dtDateTime;
                 }
             }
             catch (Exception ex)

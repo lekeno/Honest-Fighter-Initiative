@@ -89,6 +89,9 @@ namespace HonestFighterInitiative
             timer_ping_use.Start();
             timer_ping_au.Start();
 
+            DateTime? dateTimeFromUtcServer = Utils.GetUtcTimeFromServer();
+            currentDateTimeUtc = dateTimeFromUtcServer ?? DateTime.UtcNow;
+
             timer_clock_request.Start();
             timer_clock.Start();
 
