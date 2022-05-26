@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,13 +17,16 @@ namespace HonestFighterInitiative
     public partial class FormOverlay : Form
     {
         const double pingInterval = 1000;
-        const int jitter_latency_samples_count = 5;
+        const int jitter_latency_samples_count = 15;
+        const int line_max_char_count = 20;
 
         System.Timers.Timer timer_ping_de = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_uk = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_usw = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_use = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_au = new System.Timers.Timer(pingInterval);
+
+        System.Timers.Timer timer_clock = new System.Timers.Timer(1000);
 
         [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
         private static extern int SetWindowLong(HandleRef hWnd, int nIndex, int dwNewLong);
@@ -43,8 +47,18 @@ namespace HonestFighterInitiative
             #endregion
 
             this.AllowTransparency = true;
-            this.BackColor = Color.Red;
+            this.BackColor = Color.Black;
             this.TransparencyKey = this.BackColor;
+
+            #region StartPosition
+
+            Rectangle workingArea = Screen.GetWorkingArea(this);
+            this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height*0.3)));
+
+            #endregion
+
+            var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+            lbl_SerialNumber.Text = $"{assemblyVersion.Major}{assemblyVersion.Minor}{assemblyVersion.Build}{assemblyVersion.Revision}";
 
             #region Timers
 
@@ -54,19 +68,41 @@ namespace HonestFighterInitiative
             timer_ping_use.Elapsed += Timer_ping_use_Elapsed;
             timer_ping_au.Elapsed += Timer_ping_au_Elapsed;
 
+            timer_clock.Elapsed += Timer_clock_Elapsed;
+
             timer_ping_de.AutoReset = true;
             timer_ping_uk.AutoReset = true;
             timer_ping_usw.AutoReset = true;
             timer_ping_use.AutoReset = true;
             timer_ping_au.AutoReset = true;
+            timer_clock.AutoReset = true;
 
             timer_ping_de.Start();
             timer_ping_uk.Start();
             timer_ping_usw.Start();
             timer_ping_use.Start();
-            timer_ping_au.Start(); 
+            timer_ping_au.Start();
+
+            timer_clock.Start();
 
             #endregion
+        }
+
+        private void Timer_clock_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                DateTime dateTime = DateTime.UtcNow;
+                
+                this.Invoke(new Action(() =>
+                {
+                    lbl_Clock.Text = dateTime.ToString("HH:mm:ss");
+                }));
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
         }
 
         private async void Timer_ping_au_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -75,7 +111,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_AU);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{((long)roundtripTime).ToString("N")}ms";
+                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_AU.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_AU.Count > jitter_latency_samples_count)
@@ -90,7 +126,71 @@ namespace HonestFighterInitiative
                 this.Invoke(new Action(() => {
                     lbl_Ping_AU.Text = newText_Ping;
                     lbl_Jitter_AU.Text = newText_Jitter;
+
+                    string lts = LatencyTextLine((long)roundtripTime);
+                    lbl_Line_AU.Text = lts;
+                    if (lts.Count() == line_max_char_count)
+                    {
+                        lbl_Line_AU.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        lbl_Line_AU.ForeColor = Color.White;
+                    }
+                    //DrawLine(ref pcb_Graphic_AU, (long)roundtripTime);
                 }));
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private string LatencyTextLine(long pingValue)
+        {
+            string lineText = "";
+
+            try
+            {
+                int textLineCharCount = pingValue > StaticData_Const.max_ping_ok ? line_max_char_count : Convert.ToInt32(Convert.ToDouble(pingValue) / Convert.ToDouble(StaticData_Const.max_ping_ok) * line_max_char_count);
+
+                for (int i = 0; i < textLineCharCount; i++)
+                {
+                    lineText += "-";
+                }
+
+                return lineText;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+
+            return "NO INFO";
+        }
+
+        private void DrawLine(ref PictureBox control, long pingValue)
+        {
+            try
+            {
+                control.Image?.Dispose();
+                //.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                using (Graphics g = control.CreateGraphics())
+                {
+                    Pen pen = pingValue > StaticData_Const.max_ping_ok ? new Pen(Color.Red, 2) : new Pen(Color.White, 2);
+                    //pen.Width = 2;
+
+                    double maxHeight = Convert.ToDouble(g.DpiY);
+                    double maxWidth = Convert.ToDouble(g.DpiX);
+                    
+                    double lineWidth = pingValue > StaticData_Const.max_ping_ok ? maxWidth : Convert.ToDouble(pingValue) / Convert.ToDouble(StaticData_Const.max_ping_ok) * maxWidth;
+
+                    Point startPoint = new Point(0, Convert.ToInt32(maxHeight/2));
+
+                    Point endPoint = new Point(Convert.ToInt32(lineWidth), Convert.ToInt32(maxHeight / 2));
+
+                    g.DrawLine(pen, startPoint, endPoint);
+                }
             }
             catch (Exception ex)
             {
@@ -104,7 +204,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_USE);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{((long)roundtripTime).ToString("N")}ms";
+                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_USE.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_USE.Count > jitter_latency_samples_count)
@@ -119,6 +219,17 @@ namespace HonestFighterInitiative
                 this.Invoke(new Action(() => {
                     lbl_Ping_USE.Text = newText_Ping;
                     lbl_Jitter_USE.Text = newText_Jitter;
+
+                    string lts = LatencyTextLine((long)roundtripTime);
+                    lbl_Line_USE.Text = lts;
+                    if (lts.Count() == line_max_char_count)
+                    {
+                        lbl_Line_USE.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        lbl_Line_USE.ForeColor = Color.White;
+                    }
                 }));
             }
             catch (Exception ex)
@@ -133,7 +244,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_USW);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{((long)roundtripTime).ToString("N")}ms";
+                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_USW.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_USW.Count > jitter_latency_samples_count)
@@ -148,6 +259,17 @@ namespace HonestFighterInitiative
                 this.Invoke(new Action(() => {
                     lbl_Ping_USW.Text = newText_Ping;
                     lbl_Jitter_USW.Text = newText_Jitter;
+
+                    string lts = LatencyTextLine((long)roundtripTime);
+                    lbl_Line_USW.Text = lts;
+                    if (lts.Count() == line_max_char_count)
+                    {
+                        lbl_Line_USW.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        lbl_Line_USW.ForeColor = Color.White;
+                    }
                 }));
             }
             catch (Exception ex)
@@ -162,7 +284,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_UK);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{((long)roundtripTime).ToString("N")}ms";
+                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_UK.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_UK.Count > jitter_latency_samples_count)
@@ -177,6 +299,17 @@ namespace HonestFighterInitiative
                 this.Invoke(new Action(() => {
                     lbl_Ping_UK.Text = newText_Ping;
                     lbl_Jitter_UK.Text = newText_Jitter;
+
+                    string lts = LatencyTextLine((long)roundtripTime);
+                    lbl_Line_UK.Text = lts;
+                    if (lts.Count() == line_max_char_count)
+                    {
+                        lbl_Line_UK.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        lbl_Line_UK.ForeColor = Color.White;
+                    }
                 }));
             }
             catch (Exception ex)
@@ -191,7 +324,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_DE);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{((long)roundtripTime).ToString("N")}ms";
+                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_DE.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_DE.Count > jitter_latency_samples_count)
@@ -206,6 +339,17 @@ namespace HonestFighterInitiative
                 this.Invoke(new Action(() => {
                     lbl_Ping_DE.Text = newText_Ping;
                     lbl_Jitter_DE.Text = newText_Jitter;
+
+                    string lts = LatencyTextLine((long)roundtripTime);
+                    lbl_Line_DE.Text = lts;
+                    if (lts.Count() == line_max_char_count)
+                    {
+                        lbl_Line_DE.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        lbl_Line_DE.ForeColor = Color.White;
+                    }
                 }));
             }
             catch (Exception ex)
