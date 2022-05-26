@@ -13,5 +13,7 @@ namespace HonestFighterInitiative
         internal const string Ping_Host_UK = "51.89.166.226";
         internal const string Ping_Host_USE = "147.135.112.184";
         internal const string Ping_Host_USW = "51.81.186.185";
+
+        internal const int max_ping_ok = 400;
     }
 }
