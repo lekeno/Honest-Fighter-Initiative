@@ -20,12 +20,15 @@ namespace HonestFighterInitiative
         const int jitter_latency_samples_count = 15;
         const int line_max_char_count = 20;
 
+        private DateTime currentDateTimeUtc;
+
         System.Timers.Timer timer_ping_de = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_uk = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_usw = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_use = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_au = new System.Timers.Timer(pingInterval);
 
+        System.Timers.Timer timer_clock_request = new System.Timers.Timer(10000);
         System.Timers.Timer timer_clock = new System.Timers.Timer(1000);
 
         [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
@@ -42,8 +45,8 @@ namespace HonestFighterInitiative
             #region Enable click-through
             //https://stackoverflow.com/questions/2798245/click-through-in-c-sharp-form
             int initialStyle = GetWindowLong(this.Handle, -20);
-            SetWindowLong(new HandleRef(this, this.Handle), -20, initialStyle | 0x80000 | 0x20); 
-            
+            SetWindowLong(new HandleRef(this, this.Handle), -20, initialStyle | 0x80000 | 0x20);
+
             #endregion
 
             this.AllowTransparency = true;
@@ -53,7 +56,7 @@ namespace HonestFighterInitiative
             #region StartPosition
 
             Rectangle workingArea = Screen.GetWorkingArea(this);
-            this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height*0.3)));
+            this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height * 0.3)));
 
             #endregion
 
@@ -68,6 +71,7 @@ namespace HonestFighterInitiative
             timer_ping_use.Elapsed += Timer_ping_use_Elapsed;
             timer_ping_au.Elapsed += Timer_ping_au_Elapsed;
 
+            timer_clock_request.Elapsed += Timer_clock_request_Elapsed;
             timer_clock.Elapsed += Timer_clock_Elapsed;
 
             timer_ping_de.AutoReset = true;
@@ -75,6 +79,8 @@ namespace HonestFighterInitiative
             timer_ping_usw.AutoReset = true;
             timer_ping_use.AutoReset = true;
             timer_ping_au.AutoReset = true;
+
+            timer_clock_request.AutoReset = true;
             timer_clock.AutoReset = true;
 
             timer_ping_de.Start();
@@ -83,20 +89,47 @@ namespace HonestFighterInitiative
             timer_ping_use.Start();
             timer_ping_au.Start();
 
+            timer_clock_request.Start();
             timer_clock.Start();
 
             #endregion
+        }
+
+        private void Timer_clock_request_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                DateTime? dateTimeFromUtcServer = Utils.GetUtcTimeFromServer();
+
+                currentDateTimeUtc = dateTimeFromUtcServer ?? DateTime.UtcNow;
+
+                this.Invoke(new Action(() =>
+                {
+                    lbl_Clock.Text = currentDateTimeUtc.ToString("HH:mm:ss");
+                }));
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
         }
 
         private void Timer_clock_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
             {
-                DateTime dateTime = DateTime.UtcNow;
-                
+                if (currentDateTimeUtc == default)
+                {
+                    currentDateTimeUtc = DateTime.UtcNow;
+                }
+                else
+                {
+                    currentDateTimeUtc += TimeSpan.FromSeconds(1);
+                }
+
                 this.Invoke(new Action(() =>
                 {
-                    lbl_Clock.Text = dateTime.ToString("HH:mm:ss");
+                    lbl_Clock.Text = currentDateTimeUtc.ToString("HH:mm:ss");
                 }));
             }
             catch (Exception ex)
@@ -123,7 +156,8 @@ namespace HonestFighterInitiative
 
                 string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
 
-                this.Invoke(new Action(() => {
+                this.Invoke(new Action(() =>
+                {
                     lbl_Ping_AU.Text = newText_Ping;
                     lbl_Jitter_AU.Text = newText_Jitter;
 
@@ -182,10 +216,10 @@ namespace HonestFighterInitiative
 
                     double maxHeight = Convert.ToDouble(g.DpiY);
                     double maxWidth = Convert.ToDouble(g.DpiX);
-                    
+
                     double lineWidth = pingValue > StaticData_Const.max_ping_ok ? maxWidth : Convert.ToDouble(pingValue) / Convert.ToDouble(StaticData_Const.max_ping_ok) * maxWidth;
 
-                    Point startPoint = new Point(0, Convert.ToInt32(maxHeight/2));
+                    Point startPoint = new Point(0, Convert.ToInt32(maxHeight / 2));
 
                     Point endPoint = new Point(Convert.ToInt32(lineWidth), Convert.ToInt32(maxHeight / 2));
 
@@ -216,7 +250,8 @@ namespace HonestFighterInitiative
 
                 string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
 
-                this.Invoke(new Action(() => {
+                this.Invoke(new Action(() =>
+                {
                     lbl_Ping_USE.Text = newText_Ping;
                     lbl_Jitter_USE.Text = newText_Jitter;
 
@@ -256,7 +291,8 @@ namespace HonestFighterInitiative
 
                 string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
 
-                this.Invoke(new Action(() => {
+                this.Invoke(new Action(() =>
+                {
                     lbl_Ping_USW.Text = newText_Ping;
                     lbl_Jitter_USW.Text = newText_Jitter;
 
@@ -296,7 +332,8 @@ namespace HonestFighterInitiative
 
                 string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
 
-                this.Invoke(new Action(() => {
+                this.Invoke(new Action(() =>
+                {
                     lbl_Ping_UK.Text = newText_Ping;
                     lbl_Jitter_UK.Text = newText_Jitter;
 
@@ -336,7 +373,8 @@ namespace HonestFighterInitiative
 
                 string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
 
-                this.Invoke(new Action(() => {
+                this.Invoke(new Action(() =>
+                {
                     lbl_Ping_DE.Text = newText_Ping;
                     lbl_Jitter_DE.Text = newText_Jitter;
 
@@ -398,9 +436,9 @@ namespace HonestFighterInitiative
 
                 List<double> latenciesDifferences = new List<double>();
 
-                for (int i = 0; i < pLatencies.Count-1; i++)
+                for (int i = 0; i < pLatencies.Count - 1; i++)
                 {
-                    double diff = pLatencies[i+1] - pLatencies[i];
+                    double diff = pLatencies[i + 1] - pLatencies[i];
                     latenciesDifferences.Add(diff);
                 }
 

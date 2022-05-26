@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,6 +76,26 @@ namespace HonestFighterInitiative
                         break;
                     default:
                         break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+
+            return result;
+        }
+
+        internal static DateTime? GetUtcTimeFromServer()
+        {
+            DateTime? result = null;
+
+            try
+            {
+                using (var _client = new HttpClient())
+                {
+                    JObject response = JObject.Parse(_client.GetStringAsync("http://worldtimeapi.org/api/timezone/Etc/UTC").Result);
+                    result = response["utc_datetime"]?.Value<DateTime>().ToUniversalTime();
                 }
             }
             catch (Exception ex)
