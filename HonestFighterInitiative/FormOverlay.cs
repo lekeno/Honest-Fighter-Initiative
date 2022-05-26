@@ -53,12 +53,12 @@ namespace HonestFighterInitiative
             #region StartPosition
 
             Rectangle workingArea = Screen.GetWorkingArea(this);
-            this.Location = new Point(workingArea.Left, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height*0.1)));
+            this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height*0.2)));
 
             #endregion
 
             var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
-            lbl_SerialNumber.Text = $"{assemblyVersion.Major}.{assemblyVersion.Minor}.{assemblyVersion.Build}.{assemblyVersion.Revision}";
+            lbl_SerialNumber.Text = $"{assemblyVersion.Major}{assemblyVersion.Minor}{assemblyVersion.Build}{assemblyVersion.Revision}";
 
             #region Timers
 
