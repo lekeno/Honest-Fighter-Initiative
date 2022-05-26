@@ -69,15 +69,5 @@ namespace HonestFighterInitiative.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap spearlogov2_200x200 {
-            get {
-                object obj = ResourceManager.GetObject("spearlogov2_200x200", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

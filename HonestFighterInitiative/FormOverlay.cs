@@ -110,9 +110,9 @@ namespace HonestFighterInitiative
                 {
                     lbl_Clock.Text = currentDateTimeUtc.ToString("HH:mm:ss");
 
-                    if (pcb_SpearLogo.Visible == true)
+                    if (lbl_Banner.Visible == true)
                     {
-                        pcb_SpearLogo.Visible = false;
+                        lbl_Banner.Visible = false;
                     }
                 }));
             }
