@@ -201,6 +201,7 @@ namespace HonestFighterInitiative
                 this.Invoke(new Action(() =>
                 {
                     lbl_Ping_AU.Text = newText_Ping;
+                    //Debug.Print(lbl_Ping_AU.Text);
                     lbl_Jitter_AU.Text = newText_Jitter;
 
                     string lts = LatencyTextLine((long)roundtripTime);
@@ -571,6 +572,19 @@ namespace HonestFighterInitiative
             try
             {
                 Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormAbout formAbout = new FormAbout();
+                formAbout.ShowDialog();
             }
             catch (Exception ex)
             {

@@ -53,11 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormMain.cs">
+    <Compile Include="FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
+    <Compile Include="FormAbout.Designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
     </Compile>
     <Compile Include="FormOverlay.cs">
       <SubType>Form</SubType>
@@ -71,8 +71,8 @@
     <Compile Include="StaticData.cs" />
     <Compile Include="StaticData_Const.cs" />
     <Compile Include="Utils.cs" />
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
+    <EmbeddedResource Include="FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOverlay.resx">
       <DependentUpon>FormOverlay.cs</DependentUpon>
@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\LogoEmojiWithFont.png" />
+    <None Include="assets\spearlogov2_200x200.png" />
     <Content Include="LogoEmoji.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -117,6 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="rtb_Text.Text" xml:space="preserve">
+    <value>What does this software do?
+This software sends every second a network-ping ( https://en.wikipedia.org/wiki/Ping_(networking_utility) ) to servers in the United Kingdom, Germany, US-East, US-West, and Australia and displays in it's overlay-window the latency and the jitter as well as a graphical visualization of the latency.
+Utilizing this tool, network-lags and the usage of so-called "lag-switches" will become easier to detect.
+
+This project is open-source:
+https://github.com/EmanueleCiriachi/Honest-Fighter-Initiative
+
+The idea is that as many pilots as possible join this initiative and use this overlay during the fight so that it can be seen in their videos.
+If many do this, there will be enormous pressure on the pilots who do not use it.
+
+Feel free to join the official Discord-server of the Honest Fighter Initiative:
+https://discord.gg/zYqTBXR2nh</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
