@@ -52,19 +52,19 @@
             this.lbl_Jitter_USE = new System.Windows.Forms.Label();
             this.lbl_Jitter_AU = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lbl_SerialNumber = new System.Windows.Forms.Label();
             this.lbl_Banner = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lbl_SerialNumber = new System.Windows.Forms.Label();
+            this.pcb_Logo = new System.Windows.Forms.PictureBox();
             this.tlpInfo.SuspendLayout();
             this.pnlHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcb_Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_Line_USW
             // 
             this.lbl_Line_USW.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_USW.AutoSize = true;
-            this.lbl_Line_USW.Location = new System.Drawing.Point(132, 33);
+            this.lbl_Line_USW.Location = new System.Drawing.Point(131, 33);
             this.lbl_Line_USW.Name = "lbl_Line_USW";
             this.lbl_Line_USW.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_USW.TabIndex = 22;
@@ -75,7 +75,7 @@
             // 
             this.lbl_Line_USE.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_USE.AutoSize = true;
-            this.lbl_Line_USE.Location = new System.Drawing.Point(132, 49);
+            this.lbl_Line_USE.Location = new System.Drawing.Point(131, 49);
             this.lbl_Line_USE.Name = "lbl_Line_USE";
             this.lbl_Line_USE.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_USE.TabIndex = 23;
@@ -86,7 +86,7 @@
             // 
             this.lbl_Line_AU.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_AU.AutoSize = true;
-            this.lbl_Line_AU.Location = new System.Drawing.Point(132, 65);
+            this.lbl_Line_AU.Location = new System.Drawing.Point(131, 65);
             this.lbl_Line_AU.Name = "lbl_Line_AU";
             this.lbl_Line_AU.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_AU.TabIndex = 24;
@@ -97,7 +97,7 @@
             // 
             this.lbl_Line_UK.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_UK.AutoSize = true;
-            this.lbl_Line_UK.Location = new System.Drawing.Point(132, 17);
+            this.lbl_Line_UK.Location = new System.Drawing.Point(131, 17);
             this.lbl_Line_UK.Name = "lbl_Line_UK";
             this.lbl_Line_UK.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_UK.TabIndex = 21;
@@ -108,7 +108,7 @@
             // 
             this.lbl_Line_DE.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_DE.AutoSize = true;
-            this.lbl_Line_DE.Location = new System.Drawing.Point(132, 1);
+            this.lbl_Line_DE.Location = new System.Drawing.Point(131, 1);
             this.lbl_Line_DE.Name = "lbl_Line_DE";
             this.lbl_Line_DE.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_DE.TabIndex = 20;
@@ -121,7 +121,7 @@
             this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.57576F));
             this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.87878F));
             this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.54545F));
-            this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
             this.tlpInfo.Controls.Add(this.lbl_Clock, 0, 5);
             this.tlpInfo.Controls.Add(this.lbl_Ping_AU, 1, 4);
             this.tlpInfo.Controls.Add(this.lbl_Ping_USE, 1, 3);
@@ -164,7 +164,7 @@
             this.lbl_Clock.ForeColor = System.Drawing.Color.Red;
             this.lbl_Clock.Location = new System.Drawing.Point(3, 80);
             this.lbl_Clock.Name = "lbl_Clock";
-            this.lbl_Clock.Size = new System.Drawing.Size(85, 20);
+            this.lbl_Clock.Size = new System.Drawing.Size(84, 20);
             this.lbl_Clock.TabIndex = 26;
             this.lbl_Clock.Text = "Clock";
             this.lbl_Clock.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_Paint);
@@ -176,7 +176,7 @@
             this.lbl_Ping_AU.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_AU.Location = new System.Drawing.Point(45, 64);
             this.lbl_Ping_AU.Name = "lbl_Ping_AU";
-            this.lbl_Ping_AU.Size = new System.Drawing.Size(43, 16);
+            this.lbl_Ping_AU.Size = new System.Drawing.Size(42, 16);
             this.lbl_Ping_AU.TabIndex = 14;
             this.lbl_Ping_AU.Text = "N/A";
             this.lbl_Ping_AU.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -189,7 +189,7 @@
             this.lbl_Ping_USE.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_USE.Location = new System.Drawing.Point(45, 48);
             this.lbl_Ping_USE.Name = "lbl_Ping_USE";
-            this.lbl_Ping_USE.Size = new System.Drawing.Size(43, 16);
+            this.lbl_Ping_USE.Size = new System.Drawing.Size(42, 16);
             this.lbl_Ping_USE.TabIndex = 13;
             this.lbl_Ping_USE.Text = "N/A";
             this.lbl_Ping_USE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -202,7 +202,7 @@
             this.lbl_Ping_USW.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_USW.Location = new System.Drawing.Point(45, 32);
             this.lbl_Ping_USW.Name = "lbl_Ping_USW";
-            this.lbl_Ping_USW.Size = new System.Drawing.Size(43, 16);
+            this.lbl_Ping_USW.Size = new System.Drawing.Size(42, 16);
             this.lbl_Ping_USW.TabIndex = 12;
             this.lbl_Ping_USW.Text = "N/A";
             this.lbl_Ping_USW.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -215,7 +215,7 @@
             this.lbl_Ping_UK.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_UK.Location = new System.Drawing.Point(45, 16);
             this.lbl_Ping_UK.Name = "lbl_Ping_UK";
-            this.lbl_Ping_UK.Size = new System.Drawing.Size(43, 16);
+            this.lbl_Ping_UK.Size = new System.Drawing.Size(42, 16);
             this.lbl_Ping_UK.TabIndex = 11;
             this.lbl_Ping_UK.Text = "N/A";
             this.lbl_Ping_UK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -228,7 +228,7 @@
             this.lbl_Ping_DE.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_DE.Location = new System.Drawing.Point(45, 0);
             this.lbl_Ping_DE.Name = "lbl_Ping_DE";
-            this.lbl_Ping_DE.Size = new System.Drawing.Size(43, 16);
+            this.lbl_Ping_DE.Size = new System.Drawing.Size(42, 16);
             this.lbl_Ping_DE.TabIndex = 10;
             this.lbl_Ping_DE.Text = "N/A";
             this.lbl_Ping_DE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -304,7 +304,7 @@
             this.lbl_Jitter_DE.AutoSize = true;
             this.lbl_Jitter_DE.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_DE.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_DE.Location = new System.Drawing.Point(94, 0);
+            this.lbl_Jitter_DE.Location = new System.Drawing.Point(93, 0);
             this.lbl_Jitter_DE.Name = "lbl_Jitter_DE";
             this.lbl_Jitter_DE.Size = new System.Drawing.Size(32, 16);
             this.lbl_Jitter_DE.TabIndex = 15;
@@ -317,7 +317,7 @@
             this.lbl_Jitter_UK.AutoSize = true;
             this.lbl_Jitter_UK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_UK.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_UK.Location = new System.Drawing.Point(94, 16);
+            this.lbl_Jitter_UK.Location = new System.Drawing.Point(93, 16);
             this.lbl_Jitter_UK.Name = "lbl_Jitter_UK";
             this.lbl_Jitter_UK.Size = new System.Drawing.Size(32, 16);
             this.lbl_Jitter_UK.TabIndex = 16;
@@ -330,7 +330,7 @@
             this.lbl_Jitter_USW.AutoSize = true;
             this.lbl_Jitter_USW.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_USW.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_USW.Location = new System.Drawing.Point(94, 32);
+            this.lbl_Jitter_USW.Location = new System.Drawing.Point(93, 32);
             this.lbl_Jitter_USW.Name = "lbl_Jitter_USW";
             this.lbl_Jitter_USW.Size = new System.Drawing.Size(32, 16);
             this.lbl_Jitter_USW.TabIndex = 17;
@@ -343,7 +343,7 @@
             this.lbl_Jitter_USE.AutoSize = true;
             this.lbl_Jitter_USE.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_USE.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_USE.Location = new System.Drawing.Point(94, 48);
+            this.lbl_Jitter_USE.Location = new System.Drawing.Point(93, 48);
             this.lbl_Jitter_USE.Name = "lbl_Jitter_USE";
             this.lbl_Jitter_USE.Size = new System.Drawing.Size(32, 16);
             this.lbl_Jitter_USE.TabIndex = 18;
@@ -356,7 +356,7 @@
             this.lbl_Jitter_AU.AutoSize = true;
             this.lbl_Jitter_AU.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_AU.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_AU.Location = new System.Drawing.Point(94, 64);
+            this.lbl_Jitter_AU.Location = new System.Drawing.Point(93, 64);
             this.lbl_Jitter_AU.Name = "lbl_Jitter_AU";
             this.lbl_Jitter_AU.Size = new System.Drawing.Size(32, 16);
             this.lbl_Jitter_AU.TabIndex = 19;
@@ -368,11 +368,22 @@
             // 
             this.pnlHeader.Controls.Add(this.lbl_Banner);
             this.pnlHeader.Controls.Add(this.lbl_SerialNumber);
-            this.pnlHeader.Controls.Add(this.pictureBox1);
+            this.pnlHeader.Controls.Add(this.pcb_Logo);
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(242, 55);
             this.pnlHeader.TabIndex = 0;
+            // 
+            // lbl_Banner
+            // 
+            this.lbl_Banner.AutoSize = true;
+            this.lbl_Banner.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Banner.ForeColor = System.Drawing.Color.LightGray;
+            this.lbl_Banner.Location = new System.Drawing.Point(133, 0);
+            this.lbl_Banner.Name = "lbl_Banner";
+            this.lbl_Banner.Size = new System.Drawing.Size(106, 24);
+            this.lbl_Banner.TabIndex = 2;
+            this.lbl_Banner.Text = "By\r\nTHE SPEAR NETWORK";
             // 
             // lbl_SerialNumber
             // 
@@ -388,27 +399,16 @@
             this.lbl_SerialNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lbl_SerialNumber.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_Paint);
             // 
-            // lbl_Banner
+            // pcb_Logo
             // 
-            this.lbl_Banner.AutoSize = true;
-            this.lbl_Banner.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Banner.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Banner.Location = new System.Drawing.Point(133, 0);
-            this.lbl_Banner.Name = "lbl_Banner";
-            this.lbl_Banner.Size = new System.Drawing.Size(106, 24);
-            this.lbl_Banner.TabIndex = 2;
-            this.lbl_Banner.Text = "By\r\nTHE SPEAR NETWORK";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Image = global::HonestFighterInitiative.Properties.Resources.LogoEmojiWithFont;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(133, 55);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pcb_Logo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pcb_Logo.Image = global::HonestFighterInitiative.Properties.Resources.LogoEmojiWithFont;
+            this.pcb_Logo.Location = new System.Drawing.Point(0, 0);
+            this.pcb_Logo.Name = "pcb_Logo";
+            this.pcb_Logo.Size = new System.Drawing.Size(133, 55);
+            this.pcb_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pcb_Logo.TabIndex = 0;
+            this.pcb_Logo.TabStop = false;
             // 
             // FormOverlay
             // 
@@ -430,7 +430,7 @@
             this.tlpInfo.PerformLayout();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcb_Logo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -454,7 +454,7 @@
         private System.Windows.Forms.Label lbl_Jitter_USW;
         private System.Windows.Forms.Label lbl_Jitter_USE;
         private System.Windows.Forms.Label lbl_Jitter_AU;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pcb_Logo;
         private System.Windows.Forms.Label lbl_Line_USW;
         private System.Windows.Forms.Label lbl_Line_USE;
         private System.Windows.Forms.Label lbl_Line_AU;

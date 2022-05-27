@@ -22,6 +22,16 @@ namespace HonestFighterInitiative
 
         private DateTime currentDateTimeUtc;
 
+        private MakeMovable _move;
+
+        private const uint WS_EX_LAYERED = 0x00080000;
+        private const uint WS_EX_TRANSPARENT = 0x00000020;
+
+        public enum GWL
+        {
+            ExStyle = -20
+        }
+
         System.Timers.Timer timer_ping_de = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_uk = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_usw = new System.Timers.Timer(pingInterval);
@@ -31,23 +41,36 @@ namespace HonestFighterInitiative
         System.Timers.Timer timer_clock_request = new System.Timers.Timer(10000);
         System.Timers.Timer timer_clock = new System.Timers.Timer(1000);
 
+        /*
         [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
         private static extern int SetWindowLong(HandleRef hWnd, int nIndex, int dwNewLong);
 
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        */
+
+        [DllImport("user32.dll")]
+        public static extern uint GetWindowLong(IntPtr hWnd, GWL nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern uint SetWindowLong(IntPtr hWnd, GWL nIndex, uint dwNewLong);
 
 
         public FormOverlay()
         {
             InitializeComponent();
+            
+            _move = new MakeMovable(this);
+            _move.SetMovable(pcb_Logo);
 
-            #region Enable click-through
-            //https://stackoverflow.com/questions/2798245/click-through-in-c-sharp-form
-            int initialStyle = GetWindowLong(this.Handle, -20);
-            SetWindowLong(new HandleRef(this, this.Handle), -20, initialStyle | 0x80000 | 0x20);
+            ClickThrough_Enable();
 
-            #endregion
+            //#region Enable click-through
+            ////https://stackoverflow.com/questions/2798245/click-through-in-c-sharp-form
+            //int initialStyle = GetWindowLong(this.Handle, -20);
+            //SetWindowLong(new HandleRef(this, this.Handle), -20, initialStyle | 0x80000 | 0x20);
+
+            //#endregion
 
             this.AllowTransparency = true;
             this.BackColor = Color.Black;
@@ -460,6 +483,34 @@ namespace HonestFighterInitiative
             }
 
             return null;
+        }
+
+        private void ClickThrough_Enable()
+        {
+            //https://stackoverflow.com/questions/25743982/setwindowlong-enable-disable-click-through-form
+            try
+            {
+                uint ex_style = GetWindowLong(this.Handle, GWL.ExStyle);
+                SetWindowLong(this.Handle, GWL.ExStyle, ex_style | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private void ClickThrough_Disable()
+        {
+            //https://stackoverflow.com/questions/25743982/setwindowlong-enable-disable-click-through-form
+            try
+            {
+                uint ex_style = GetWindowLong(this.Handle, GWL.ExStyle);
+                SetWindowLong(this.Handle, GWL.ExStyle, ex_style & ~WS_EX_LAYERED & ~WS_EX_TRANSPARENT);
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
         }
     }
 }
