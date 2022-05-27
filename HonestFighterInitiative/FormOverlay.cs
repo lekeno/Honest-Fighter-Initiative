@@ -17,6 +17,8 @@ namespace HonestFighterInitiative
 {
     public partial class FormOverlay : Form
     {
+        private bool isClickThroughEnabled { get; set; }
+
         const double pingInterval = 1000;
         const int jitter_latency_samples_count = 15;
         const int line_max_char_count = 20;
@@ -79,10 +81,10 @@ namespace HonestFighterInitiative
 
             #region StartPosition
         
-            int? config_startPositionX = string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["startPositionX"]) ? default : Convert.ToInt32(ConfigurationManager.AppSettings["startPositionX"]);
-            int? config_startPositionY = string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["startPositionY"]) ? default : Convert.ToInt32(ConfigurationManager.AppSettings["startPositionY"]);
+            int? config_startPositionX = string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["startPositionX"]) ? null : Convert.ToInt32(ConfigurationManager.AppSettings["startPositionX"]);
+            int? config_startPositionY = string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["startPositionY"]) ? null : Convert.ToInt32(ConfigurationManager.AppSettings["startPositionY"]);
 
-            if (config_startPositionX == default && config_startPositionY == default)
+            if (config_startPositionX == null || config_startPositionY == null)
             {
                 Rectangle workingArea = Screen.GetWorkingArea(this);
                 this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height * 0.3)));
@@ -503,6 +505,7 @@ namespace HonestFighterInitiative
             {
                 uint ex_style = GetWindowLong(this.Handle, GWL.ExStyle);
                 SetWindowLong(this.Handle, GWL.ExStyle, ex_style | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+                isClickThroughEnabled = true;
             }
             catch (Exception ex)
             {
@@ -517,6 +520,22 @@ namespace HonestFighterInitiative
             {
                 uint ex_style = GetWindowLong(this.Handle, GWL.ExStyle);
                 SetWindowLong(this.Handle, GWL.ExStyle, ex_style & ~WS_EX_LAYERED & ~WS_EX_TRANSPARENT);
+                isClickThroughEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private void FormOverlay_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+                config.AppSettings.Settings["startPositionX"].Value = this.Location.X.ToString();
+                config.AppSettings.Settings["startPositionY"].Value = this.Location.Y.ToString();
+                config.Save(ConfigurationSaveMode.Minimal);
             }
             catch (Exception ex)
             {
