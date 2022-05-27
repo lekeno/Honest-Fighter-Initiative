@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormOverlay));
             this.lbl_Line_USW = new System.Windows.Forms.Label();
             this.lbl_Line_USE = new System.Windows.Forms.Label();
@@ -55,9 +56,13 @@
             this.lbl_Banner = new System.Windows.Forms.Label();
             this.lbl_SerialNumber = new System.Windows.Forms.Label();
             this.pcb_Logo = new System.Windows.Forms.PictureBox();
+            this.notifyIcon_Overlay = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip_notifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.enableRelocatingmodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpInfo.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_Logo)).BeginInit();
+            this.contextMenuStrip_notifyIcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_Line_USW
@@ -410,6 +415,28 @@
             this.pcb_Logo.TabIndex = 0;
             this.pcb_Logo.TabStop = false;
             // 
+            // notifyIcon_Overlay
+            // 
+            this.notifyIcon_Overlay.ContextMenuStrip = this.contextMenuStrip_notifyIcon;
+            this.notifyIcon_Overlay.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon_Overlay.Icon")));
+            this.notifyIcon_Overlay.Text = "HonestFighterInitiative";
+            this.notifyIcon_Overlay.Visible = true;
+            // 
+            // contextMenuStrip_notifyIcon
+            // 
+            this.contextMenuStrip_notifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enableRelocatingmodeToolStripMenuItem});
+            this.contextMenuStrip_notifyIcon.Name = "contextMenuStrip_notifyIcon";
+            this.contextMenuStrip_notifyIcon.Size = new System.Drawing.Size(202, 48);
+            // 
+            // enableRelocatingmodeToolStripMenuItem
+            // 
+            this.enableRelocatingmodeToolStripMenuItem.CheckOnClick = true;
+            this.enableRelocatingmodeToolStripMenuItem.Name = "enableRelocatingmodeToolStripMenuItem";
+            this.enableRelocatingmodeToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.enableRelocatingmodeToolStripMenuItem.Text = "Enable relocation-mode";
+            this.enableRelocatingmodeToolStripMenuItem.CheckedChanged += new System.EventHandler(this.enableRelocatingmodeToolStripMenuItem_CheckedChanged);
+            // 
             // FormOverlay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -432,6 +459,7 @@
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_Logo)).EndInit();
+            this.contextMenuStrip_notifyIcon.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -464,5 +492,8 @@
         private System.Windows.Forms.Label lbl_SerialNumber;
         private System.Windows.Forms.Label lbl_Clock;
         private System.Windows.Forms.Label lbl_Banner;
+        private System.Windows.Forms.NotifyIcon notifyIcon_Overlay;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_notifyIcon;
+        private System.Windows.Forms.ToolStripMenuItem enableRelocatingmodeToolStripMenuItem;
     }
 }

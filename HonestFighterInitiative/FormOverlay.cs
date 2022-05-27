@@ -17,8 +17,6 @@ namespace HonestFighterInitiative
 {
     public partial class FormOverlay : Form
     {
-        private bool isClickThroughEnabled { get; set; }
-
         const double pingInterval = 1000;
         const int jitter_latency_samples_count = 15;
         const int line_max_char_count = 20;
@@ -505,7 +503,7 @@ namespace HonestFighterInitiative
             {
                 uint ex_style = GetWindowLong(this.Handle, GWL.ExStyle);
                 SetWindowLong(this.Handle, GWL.ExStyle, ex_style | WS_EX_LAYERED | WS_EX_TRANSPARENT);
-                isClickThroughEnabled = true;
+                this.TransparencyKey = this.BackColor;
             }
             catch (Exception ex)
             {
@@ -520,7 +518,6 @@ namespace HonestFighterInitiative
             {
                 uint ex_style = GetWindowLong(this.Handle, GWL.ExStyle);
                 SetWindowLong(this.Handle, GWL.ExStyle, ex_style & ~WS_EX_LAYERED & ~WS_EX_TRANSPARENT);
-                isClickThroughEnabled = false;
             }
             catch (Exception ex)
             {
@@ -536,6 +533,32 @@ namespace HonestFighterInitiative
                 config.AppSettings.Settings["startPositionX"].Value = this.Location.X.ToString();
                 config.AppSettings.Settings["startPositionY"].Value = this.Location.Y.ToString();
                 config.Save(ConfigurationSaveMode.Minimal);
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private void enableRelocatingmodeToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (enableRelocatingmodeToolStripMenuItem.Checked)
+                {
+                    case true:
+                        {
+                            ClickThrough_Disable();
+                        }
+                        break;
+                    case false:
+                        {
+                            ClickThrough_Enable();
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
             catch (Exception ex)
             {
