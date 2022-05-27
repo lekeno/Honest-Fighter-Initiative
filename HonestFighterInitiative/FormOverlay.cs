@@ -565,5 +565,17 @@ namespace HonestFighterInitiative
                 Debug.Print(ex.ToString());
             }
         }
+
+        private void closeApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
     }
 }

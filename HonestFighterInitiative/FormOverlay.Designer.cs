@@ -59,6 +59,7 @@
             this.notifyIcon_Overlay = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip_notifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enableRelocatingmodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpInfo.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_Logo)).BeginInit();
@@ -69,7 +70,7 @@
             // 
             this.lbl_Line_USW.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_USW.AutoSize = true;
-            this.lbl_Line_USW.Location = new System.Drawing.Point(129, 33);
+            this.lbl_Line_USW.Location = new System.Drawing.Point(128, 33);
             this.lbl_Line_USW.Name = "lbl_Line_USW";
             this.lbl_Line_USW.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_USW.TabIndex = 22;
@@ -80,7 +81,7 @@
             // 
             this.lbl_Line_USE.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_USE.AutoSize = true;
-            this.lbl_Line_USE.Location = new System.Drawing.Point(129, 49);
+            this.lbl_Line_USE.Location = new System.Drawing.Point(128, 49);
             this.lbl_Line_USE.Name = "lbl_Line_USE";
             this.lbl_Line_USE.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_USE.TabIndex = 23;
@@ -91,7 +92,7 @@
             // 
             this.lbl_Line_AU.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_AU.AutoSize = true;
-            this.lbl_Line_AU.Location = new System.Drawing.Point(129, 65);
+            this.lbl_Line_AU.Location = new System.Drawing.Point(128, 65);
             this.lbl_Line_AU.Name = "lbl_Line_AU";
             this.lbl_Line_AU.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_AU.TabIndex = 24;
@@ -102,7 +103,7 @@
             // 
             this.lbl_Line_UK.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_UK.AutoSize = true;
-            this.lbl_Line_UK.Location = new System.Drawing.Point(129, 17);
+            this.lbl_Line_UK.Location = new System.Drawing.Point(128, 17);
             this.lbl_Line_UK.Name = "lbl_Line_UK";
             this.lbl_Line_UK.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_UK.TabIndex = 21;
@@ -113,7 +114,7 @@
             // 
             this.lbl_Line_DE.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_DE.AutoSize = true;
-            this.lbl_Line_DE.Location = new System.Drawing.Point(129, 1);
+            this.lbl_Line_DE.Location = new System.Drawing.Point(128, 1);
             this.lbl_Line_DE.Name = "lbl_Line_DE";
             this.lbl_Line_DE.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_DE.TabIndex = 20;
@@ -126,7 +127,7 @@
             this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.57576F));
             this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.87878F));
             this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.54545F));
-            this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 112F));
             this.tlpInfo.Controls.Add(this.lbl_Clock, 0, 5);
             this.tlpInfo.Controls.Add(this.lbl_Ping_AU, 1, 4);
             this.tlpInfo.Controls.Add(this.lbl_Ping_USE, 1, 3);
@@ -169,7 +170,7 @@
             this.lbl_Clock.ForeColor = System.Drawing.Color.Red;
             this.lbl_Clock.Location = new System.Drawing.Point(3, 80);
             this.lbl_Clock.Name = "lbl_Clock";
-            this.lbl_Clock.Size = new System.Drawing.Size(83, 20);
+            this.lbl_Clock.Size = new System.Drawing.Size(82, 20);
             this.lbl_Clock.TabIndex = 26;
             this.lbl_Clock.Text = "Clock";
             this.lbl_Clock.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_Paint);
@@ -181,7 +182,7 @@
             this.lbl_Ping_AU.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_AU.Location = new System.Drawing.Point(44, 64);
             this.lbl_Ping_AU.Name = "lbl_Ping_AU";
-            this.lbl_Ping_AU.Size = new System.Drawing.Size(42, 16);
+            this.lbl_Ping_AU.Size = new System.Drawing.Size(41, 16);
             this.lbl_Ping_AU.TabIndex = 14;
             this.lbl_Ping_AU.Text = "N/A";
             this.lbl_Ping_AU.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -194,7 +195,7 @@
             this.lbl_Ping_USE.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_USE.Location = new System.Drawing.Point(44, 48);
             this.lbl_Ping_USE.Name = "lbl_Ping_USE";
-            this.lbl_Ping_USE.Size = new System.Drawing.Size(42, 16);
+            this.lbl_Ping_USE.Size = new System.Drawing.Size(41, 16);
             this.lbl_Ping_USE.TabIndex = 13;
             this.lbl_Ping_USE.Text = "N/A";
             this.lbl_Ping_USE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -207,7 +208,7 @@
             this.lbl_Ping_USW.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_USW.Location = new System.Drawing.Point(44, 32);
             this.lbl_Ping_USW.Name = "lbl_Ping_USW";
-            this.lbl_Ping_USW.Size = new System.Drawing.Size(42, 16);
+            this.lbl_Ping_USW.Size = new System.Drawing.Size(41, 16);
             this.lbl_Ping_USW.TabIndex = 12;
             this.lbl_Ping_USW.Text = "N/A";
             this.lbl_Ping_USW.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -220,7 +221,7 @@
             this.lbl_Ping_UK.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_UK.Location = new System.Drawing.Point(44, 16);
             this.lbl_Ping_UK.Name = "lbl_Ping_UK";
-            this.lbl_Ping_UK.Size = new System.Drawing.Size(42, 16);
+            this.lbl_Ping_UK.Size = new System.Drawing.Size(41, 16);
             this.lbl_Ping_UK.TabIndex = 11;
             this.lbl_Ping_UK.Text = "N/A";
             this.lbl_Ping_UK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -233,7 +234,7 @@
             this.lbl_Ping_DE.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_Ping_DE.Location = new System.Drawing.Point(44, 0);
             this.lbl_Ping_DE.Name = "lbl_Ping_DE";
-            this.lbl_Ping_DE.Size = new System.Drawing.Size(42, 16);
+            this.lbl_Ping_DE.Size = new System.Drawing.Size(41, 16);
             this.lbl_Ping_DE.TabIndex = 10;
             this.lbl_Ping_DE.Text = "N/A";
             this.lbl_Ping_DE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -309,7 +310,7 @@
             this.lbl_Jitter_DE.AutoSize = true;
             this.lbl_Jitter_DE.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_DE.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_DE.Location = new System.Drawing.Point(92, 0);
+            this.lbl_Jitter_DE.Location = new System.Drawing.Point(91, 0);
             this.lbl_Jitter_DE.Name = "lbl_Jitter_DE";
             this.lbl_Jitter_DE.Size = new System.Drawing.Size(31, 16);
             this.lbl_Jitter_DE.TabIndex = 15;
@@ -322,7 +323,7 @@
             this.lbl_Jitter_UK.AutoSize = true;
             this.lbl_Jitter_UK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_UK.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_UK.Location = new System.Drawing.Point(92, 16);
+            this.lbl_Jitter_UK.Location = new System.Drawing.Point(91, 16);
             this.lbl_Jitter_UK.Name = "lbl_Jitter_UK";
             this.lbl_Jitter_UK.Size = new System.Drawing.Size(31, 16);
             this.lbl_Jitter_UK.TabIndex = 16;
@@ -335,7 +336,7 @@
             this.lbl_Jitter_USW.AutoSize = true;
             this.lbl_Jitter_USW.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_USW.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_USW.Location = new System.Drawing.Point(92, 32);
+            this.lbl_Jitter_USW.Location = new System.Drawing.Point(91, 32);
             this.lbl_Jitter_USW.Name = "lbl_Jitter_USW";
             this.lbl_Jitter_USW.Size = new System.Drawing.Size(31, 16);
             this.lbl_Jitter_USW.TabIndex = 17;
@@ -348,7 +349,7 @@
             this.lbl_Jitter_USE.AutoSize = true;
             this.lbl_Jitter_USE.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_USE.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_USE.Location = new System.Drawing.Point(92, 48);
+            this.lbl_Jitter_USE.Location = new System.Drawing.Point(91, 48);
             this.lbl_Jitter_USE.Name = "lbl_Jitter_USE";
             this.lbl_Jitter_USE.Size = new System.Drawing.Size(31, 16);
             this.lbl_Jitter_USE.TabIndex = 18;
@@ -361,7 +362,7 @@
             this.lbl_Jitter_AU.AutoSize = true;
             this.lbl_Jitter_AU.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Jitter_AU.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_Jitter_AU.Location = new System.Drawing.Point(92, 64);
+            this.lbl_Jitter_AU.Location = new System.Drawing.Point(91, 64);
             this.lbl_Jitter_AU.Name = "lbl_Jitter_AU";
             this.lbl_Jitter_AU.Size = new System.Drawing.Size(31, 16);
             this.lbl_Jitter_AU.TabIndex = 19;
@@ -425,9 +426,10 @@
             // contextMenuStrip_notifyIcon
             // 
             this.contextMenuStrip_notifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enableRelocatingmodeToolStripMenuItem});
+            this.enableRelocatingmodeToolStripMenuItem,
+            this.closeApplicationToolStripMenuItem});
             this.contextMenuStrip_notifyIcon.Name = "contextMenuStrip_notifyIcon";
-            this.contextMenuStrip_notifyIcon.Size = new System.Drawing.Size(202, 48);
+            this.contextMenuStrip_notifyIcon.Size = new System.Drawing.Size(202, 70);
             // 
             // enableRelocatingmodeToolStripMenuItem
             // 
@@ -436,6 +438,13 @@
             this.enableRelocatingmodeToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.enableRelocatingmodeToolStripMenuItem.Text = "Enable relocation-mode";
             this.enableRelocatingmodeToolStripMenuItem.CheckedChanged += new System.EventHandler(this.enableRelocatingmodeToolStripMenuItem_CheckedChanged);
+            // 
+            // closeApplicationToolStripMenuItem
+            // 
+            this.closeApplicationToolStripMenuItem.Name = "closeApplicationToolStripMenuItem";
+            this.closeApplicationToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.closeApplicationToolStripMenuItem.Text = "Close Application";
+            this.closeApplicationToolStripMenuItem.Click += new System.EventHandler(this.closeApplicationToolStripMenuItem_Click);
             // 
             // FormOverlay
             // 
@@ -495,5 +504,6 @@
         private System.Windows.Forms.NotifyIcon notifyIcon_Overlay;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_notifyIcon;
         private System.Windows.Forms.ToolStripMenuItem enableRelocatingmodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeApplicationToolStripMenuItem;
     }
 }
