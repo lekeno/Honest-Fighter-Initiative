@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -77,9 +78,19 @@ namespace HonestFighterInitiative
             this.TransparencyKey = this.BackColor;
 
             #region StartPosition
+        
+            int? config_startPositionX = string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["startPositionX"]) ? default : Convert.ToInt32(ConfigurationManager.AppSettings["startPositionX"]);
+            int? config_startPositionY = string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["startPositionY"]) ? default : Convert.ToInt32(ConfigurationManager.AppSettings["startPositionY"]);
 
-            Rectangle workingArea = Screen.GetWorkingArea(this);
-            this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height * 0.3)));
+            if (config_startPositionX == default && config_startPositionY == default)
+            {
+                Rectangle workingArea = Screen.GetWorkingArea(this);
+                this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height * 0.3)));
+            }
+            else
+            {
+                this.Location = new Point((int)config_startPositionX, (int)config_startPositionY);
+            }
 
             #endregion
 
