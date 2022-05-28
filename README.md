@@ -7,8 +7,8 @@ https://discord.gg/zYqTBXR2nh
 Here is are short video showcasing the Overlay:<br />
 https://youtu.be/5hn5DerglaE
 
-**Credits:**
-Development: AKUMA TEBORI and Conparator
+**Credits:**<br />
+Development: AKUMA TEBORI and Conparator<br />
 Host (repository): Herbrand
 
 You want to spread the word? Please use the snippet below (pre-formatted for Discord)!
