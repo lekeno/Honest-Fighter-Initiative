@@ -59,19 +59,17 @@ namespace HonestFighterInitiative
 
         public FormOverlay()
         {
+            /*
+                the way of programming is deliberately kept simple and not too nested 
+                to give also non-professional programmers the possibility to better understand the code
+            */
+
             InitializeComponent();
             
             _move = new MakeMovable(this);
             _move.SetMovable(pcb_Logo);
 
             ClickThrough_Enable();
-
-            //#region Enable click-through
-            ////https://stackoverflow.com/questions/2798245/click-through-in-c-sharp-form
-            //int initialStyle = GetWindowLong(this.Handle, -20);
-            //SetWindowLong(new HandleRef(this, this.Handle), -20, initialStyle | 0x80000 | 0x20);
-
-            //#endregion
 
             this.AllowTransparency = true;
             this.BackColor = Color.Black;
