@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>LogoEmoji.ico</ApplicationIcon>
+    <ApplicationIcon>LogoEmojiDiscordWeissEye.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -101,7 +101,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\LogoEmojiDiscordWeissEye.ico" />
+    <Content Include="assets\LogoEmojiDiscordWeissEye.png" />
     <Content Include="assets\LogoEmojiWithFont.png" />
+    <Content Include="LogoEmojiDiscordWeissEye.ico" />
     <None Include="assets\spearlogov2_200x200.png" />
     <Content Include="LogoEmoji.ico" />
   </ItemGroup>

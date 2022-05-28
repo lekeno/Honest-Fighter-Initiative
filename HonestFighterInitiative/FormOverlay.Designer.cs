@@ -57,10 +57,10 @@
             this.lbl_SerialNumber = new System.Windows.Forms.Label();
             this.notifyIcon_Overlay = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip_notifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableRelocatingmodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pcb_Logo = new System.Windows.Forms.PictureBox();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpInfo.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.contextMenuStrip_notifyIcon.SuspendLayout();
@@ -71,7 +71,7 @@
             // 
             this.lbl_Line_USW.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_USW.AutoSize = true;
-            this.lbl_Line_USW.Location = new System.Drawing.Point(128, 33);
+            this.lbl_Line_USW.Location = new System.Drawing.Point(125, 33);
             this.lbl_Line_USW.Name = "lbl_Line_USW";
             this.lbl_Line_USW.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_USW.TabIndex = 22;
@@ -82,7 +82,7 @@
             // 
             this.lbl_Line_USE.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_USE.AutoSize = true;
-            this.lbl_Line_USE.Location = new System.Drawing.Point(128, 49);
+            this.lbl_Line_USE.Location = new System.Drawing.Point(125, 49);
             this.lbl_Line_USE.Name = "lbl_Line_USE";
             this.lbl_Line_USE.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_USE.TabIndex = 23;
@@ -93,7 +93,7 @@
             // 
             this.lbl_Line_AU.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_AU.AutoSize = true;
-            this.lbl_Line_AU.Location = new System.Drawing.Point(128, 65);
+            this.lbl_Line_AU.Location = new System.Drawing.Point(125, 65);
             this.lbl_Line_AU.Name = "lbl_Line_AU";
             this.lbl_Line_AU.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_AU.TabIndex = 24;
@@ -104,7 +104,7 @@
             // 
             this.lbl_Line_UK.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_UK.AutoSize = true;
-            this.lbl_Line_UK.Location = new System.Drawing.Point(128, 17);
+            this.lbl_Line_UK.Location = new System.Drawing.Point(125, 17);
             this.lbl_Line_UK.Name = "lbl_Line_UK";
             this.lbl_Line_UK.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_UK.TabIndex = 21;
@@ -115,7 +115,7 @@
             // 
             this.lbl_Line_DE.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Line_DE.AutoSize = true;
-            this.lbl_Line_DE.Location = new System.Drawing.Point(128, 1);
+            this.lbl_Line_DE.Location = new System.Drawing.Point(125, 1);
             this.lbl_Line_DE.Name = "lbl_Line_DE";
             this.lbl_Line_DE.Size = new System.Drawing.Size(0, 13);
             this.lbl_Line_DE.TabIndex = 20;
@@ -128,7 +128,7 @@
             this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.57576F));
             this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.87878F));
             this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.54545F));
-            this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 112F));
+            this.tlpInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
             this.tlpInfo.Controls.Add(this.lbl_Clock, 0, 5);
             this.tlpInfo.Controls.Add(this.lbl_Ping_AU, 1, 4);
             this.tlpInfo.Controls.Add(this.lbl_Ping_USE, 1, 3);
@@ -420,7 +420,14 @@
             this.enableRelocatingmodeToolStripMenuItem,
             this.closeApplicationToolStripMenuItem});
             this.contextMenuStrip_notifyIcon.Name = "contextMenuStrip_notifyIcon";
-            this.contextMenuStrip_notifyIcon.Size = new System.Drawing.Size(202, 92);
+            this.contextMenuStrip_notifyIcon.Size = new System.Drawing.Size(202, 70);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // enableRelocatingmodeToolStripMenuItem
             // 
@@ -447,13 +454,6 @@
             this.pcb_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pcb_Logo.TabIndex = 0;
             this.pcb_Logo.TabStop = false;
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // FormOverlay
             // 

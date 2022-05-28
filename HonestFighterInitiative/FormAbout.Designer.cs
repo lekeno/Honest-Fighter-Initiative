@@ -29,22 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
-            this.pcb_Logo_Spear = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.rtb_Text = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.pcb_Logo_Spear = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_Logo_Spear)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pcb_Logo_Spear
-            // 
-            this.pcb_Logo_Spear.Image = global::HonestFighterInitiative.Properties.Resources.spearlogov2_200x200;
-            this.pcb_Logo_Spear.Location = new System.Drawing.Point(688, 13);
-            this.pcb_Logo_Spear.Name = "pcb_Logo_Spear";
-            this.pcb_Logo_Spear.Size = new System.Drawing.Size(100, 108);
-            this.pcb_Logo_Spear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pcb_Logo_Spear.TabIndex = 0;
-            this.pcb_Logo_Spear.TabStop = false;
             // 
             // label1
             // 
@@ -87,6 +77,16 @@
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "https://elitedangerous-spear.com";
             this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtb_Text_LinkClicked);
+            // 
+            // pcb_Logo_Spear
+            // 
+            this.pcb_Logo_Spear.Image = global::HonestFighterInitiative.Properties.Resources.spearlogov2_200x200;
+            this.pcb_Logo_Spear.Location = new System.Drawing.Point(688, 13);
+            this.pcb_Logo_Spear.Name = "pcb_Logo_Spear";
+            this.pcb_Logo_Spear.Size = new System.Drawing.Size(100, 108);
+            this.pcb_Logo_Spear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pcb_Logo_Spear.TabIndex = 0;
+            this.pcb_Logo_Spear.TabStop = false;
             // 
             // FormAbout
             // 
