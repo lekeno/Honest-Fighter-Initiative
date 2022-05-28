@@ -18,6 +18,8 @@ namespace HonestFighterInitiative
         public FormAbout()
         {
             InitializeComponent();
+
+
         }
 
         private void rtb_Text_LinkClicked(object sender, LinkClickedEventArgs e)
