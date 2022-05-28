@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -22,6 +23,16 @@ namespace HonestFighterInitiative
 
         private DateTime currentDateTimeUtc;
 
+        private MakeMovable _move;
+
+        private const uint WS_EX_LAYERED = 0x00080000;
+        private const uint WS_EX_TRANSPARENT = 0x00000020;
+
+        public enum GWL
+        {
+            ExStyle = -20
+        }
+
         System.Timers.Timer timer_ping_de = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_uk = new System.Timers.Timer(pingInterval);
         System.Timers.Timer timer_ping_usw = new System.Timers.Timer(pingInterval);
@@ -31,32 +42,55 @@ namespace HonestFighterInitiative
         System.Timers.Timer timer_clock_request = new System.Timers.Timer(10000);
         System.Timers.Timer timer_clock = new System.Timers.Timer(1000);
 
+        /*
         [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
         private static extern int SetWindowLong(HandleRef hWnd, int nIndex, int dwNewLong);
 
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        */
+
+        [DllImport("user32.dll")]
+        public static extern uint GetWindowLong(IntPtr hWnd, GWL nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern uint SetWindowLong(IntPtr hWnd, GWL nIndex, uint dwNewLong);
 
 
         public FormOverlay()
         {
             InitializeComponent();
+            
+            _move = new MakeMovable(this);
+            _move.SetMovable(pcb_Logo);
 
-            #region Enable click-through
-            //https://stackoverflow.com/questions/2798245/click-through-in-c-sharp-form
-            int initialStyle = GetWindowLong(this.Handle, -20);
-            SetWindowLong(new HandleRef(this, this.Handle), -20, initialStyle | 0x80000 | 0x20);
+            ClickThrough_Enable();
 
-            #endregion
+            //#region Enable click-through
+            ////https://stackoverflow.com/questions/2798245/click-through-in-c-sharp-form
+            //int initialStyle = GetWindowLong(this.Handle, -20);
+            //SetWindowLong(new HandleRef(this, this.Handle), -20, initialStyle | 0x80000 | 0x20);
+
+            //#endregion
 
             this.AllowTransparency = true;
             this.BackColor = Color.Black;
             this.TransparencyKey = this.BackColor;
 
             #region StartPosition
+        
+            int? config_startPositionX = string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["startPositionX"]) ? null : Convert.ToInt32(ConfigurationManager.AppSettings["startPositionX"]);
+            int? config_startPositionY = string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["startPositionY"]) ? null : Convert.ToInt32(ConfigurationManager.AppSettings["startPositionY"]);
 
-            Rectangle workingArea = Screen.GetWorkingArea(this);
-            this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height * 0.3)));
+            if (config_startPositionX == null || config_startPositionY == null)
+            {
+                Rectangle workingArea = Screen.GetWorkingArea(this);
+                this.Location = new Point(workingArea.Left + 10, workingArea.Bottom - Size.Height - (Convert.ToInt32(workingArea.Height * 0.3)));
+            }
+            else
+            {
+                this.Location = new Point((int)config_startPositionX, (int)config_startPositionY);
+            }
 
             #endregion
 
@@ -167,6 +201,7 @@ namespace HonestFighterInitiative
                 this.Invoke(new Action(() =>
                 {
                     lbl_Ping_AU.Text = newText_Ping;
+                    //Debug.Print(lbl_Ping_AU.Text);
                     lbl_Jitter_AU.Text = newText_Jitter;
 
                     string lts = LatencyTextLine((long)roundtripTime);
@@ -460,6 +495,101 @@ namespace HonestFighterInitiative
             }
 
             return null;
+        }
+
+        private void ClickThrough_Enable()
+        {
+            //https://stackoverflow.com/questions/25743982/setwindowlong-enable-disable-click-through-form
+            try
+            {
+                uint ex_style = GetWindowLong(this.Handle, GWL.ExStyle);
+                SetWindowLong(this.Handle, GWL.ExStyle, ex_style | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+                this.TransparencyKey = this.BackColor;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private void ClickThrough_Disable()
+        {
+            //https://stackoverflow.com/questions/25743982/setwindowlong-enable-disable-click-through-form
+            try
+            {
+                uint ex_style = GetWindowLong(this.Handle, GWL.ExStyle);
+                SetWindowLong(this.Handle, GWL.ExStyle, ex_style & ~WS_EX_LAYERED & ~WS_EX_TRANSPARENT);
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private void FormOverlay_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+                config.AppSettings.Settings["startPositionX"].Value = this.Location.X.ToString();
+                config.AppSettings.Settings["startPositionY"].Value = this.Location.Y.ToString();
+                config.Save(ConfigurationSaveMode.Minimal);
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private void enableRelocatingmodeToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (enableRelocatingmodeToolStripMenuItem.Checked)
+                {
+                    case true:
+                        {
+                            ClickThrough_Disable();
+                        }
+                        break;
+                    case false:
+                        {
+                            ClickThrough_Enable();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private void closeApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormAbout formAbout = new FormAbout();
+                formAbout.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.ToString());
+            }
         }
     }
 }
