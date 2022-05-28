@@ -8,9 +8,15 @@ Here is are short video showcasing the Overlay:<br />
 https://youtu.be/5hn5DerglaE
 
 **Credits:**<br />
-Development: AKUMA TEBORI and Conparator<br />
-Host (repository): Herbrand
+Development: 
+- AKUMA TEBORI
+- Conparator
+<br />
 
+Host (repository):
+- Herbrand
+
+<br />
 You want to spread the word? Please use the snippet below (pre-formatted for Discord)!
 ```
 __Honest Fighter Initiative__ | **The Initiative against network manipulation or lag switching using a new Overlay to monitor the network performance for all online games**
