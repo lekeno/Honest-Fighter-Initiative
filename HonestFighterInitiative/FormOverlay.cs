@@ -194,7 +194,12 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_AU);
 
-                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
+                string newText_Jitter = "X";
+                if (jitter_value != null)
+                {
+                    double latencies_avg = StaticData.latencies_AU.Sum() / StaticData.latencies_AU.Count;
+                    newText_Jitter = string.Format("{0:P0}", jitter_value / latencies_avg);
+                }
 
                 this.Invoke(new Action(() =>
                 {
@@ -289,7 +294,12 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_USE);
 
-                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
+                string newText_Jitter = "X";
+                if (jitter_value != null)
+                {
+                    double latencies_avg = StaticData.latencies_USE.Sum() / StaticData.latencies_USE.Count;
+                    newText_Jitter = string.Format("{0:P0}", jitter_value / latencies_avg);
+                }
 
                 this.Invoke(new Action(() =>
                 {
@@ -330,8 +340,12 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_USW);
 
-                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
-
+                string newText_Jitter = "X";
+                if (jitter_value != null) {
+                    double latencies_avg = StaticData.latencies_USW.Sum() / StaticData.latencies_USW.Count;
+                    newText_Jitter = string.Format("{0:P0}", jitter_value / latencies_avg);
+                }
+                
                 this.Invoke(new Action(() =>
                 {
                     lbl_Ping_USW.Text = newText_Ping;
@@ -371,7 +385,12 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_UK);
 
-                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
+                string newText_Jitter = "X";
+                if (jitter_value != null)
+                {
+                    double latencies_avg = StaticData.latencies_UK.Sum() / StaticData.latencies_UK.Count;
+                    newText_Jitter = string.Format("{0:P0}", jitter_value / latencies_avg);
+                }
 
                 this.Invoke(new Action(() =>
                 {
@@ -412,7 +431,12 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_DE);
 
-                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
+                string newText_Jitter = "X";
+                if (jitter_value != null)
+                {
+                    double latencies_avg = StaticData.latencies_DE.Sum() / StaticData.latencies_DE.Count;
+                    newText_Jitter = string.Format("{0:P0}", jitter_value / latencies_avg);
+                }
 
                 this.Invoke(new Action(() =>
                 {
@@ -479,7 +503,7 @@ namespace HonestFighterInitiative
 
                 for (int i = 0; i < pLatencies.Count - 1; i++)
                 {
-                    double diff = pLatencies[i + 1] - pLatencies[i];
+                    double diff = Math.Abs(pLatencies[i + 1] - pLatencies[i]);
                     latenciesDifferences.Add(diff);
                 }
 
