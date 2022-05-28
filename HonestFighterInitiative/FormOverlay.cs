@@ -186,7 +186,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_AU);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
+                string newText_Ping = roundtripTime == null || roundtripTime <= 0 ? "X" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_AU.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_AU.Count > jitter_latency_samples_count)
@@ -196,7 +196,7 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_AU);
 
-                string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
+                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
 
                 this.Invoke(new Action(() =>
                 {
@@ -229,7 +229,7 @@ namespace HonestFighterInitiative
 
             try
             {
-                int textLineCharCount = pingValue > StaticData_Const.max_ping_ok ? line_max_char_count : Convert.ToInt32(Convert.ToDouble(pingValue) / Convert.ToDouble(StaticData_Const.max_ping_ok) * line_max_char_count);
+                int textLineCharCount = pingValue > StaticData_Const.max_ping_ok || pingValue <= 0 ? line_max_char_count : Convert.ToInt32(Convert.ToDouble(pingValue) / Convert.ToDouble(StaticData_Const.max_ping_ok) * line_max_char_count);
 
                 for (int i = 0; i < textLineCharCount; i++)
                 {
@@ -243,7 +243,7 @@ namespace HonestFighterInitiative
                 Debug.Print(ex.ToString());
             }
 
-            return "NO INFO";
+            return "X";
         }
 
         private void DrawLine(ref PictureBox control, long pingValue)
@@ -281,7 +281,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_USE);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
+                string newText_Ping = roundtripTime == null || roundtripTime <= 0 ? "X" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_USE.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_USE.Count > jitter_latency_samples_count)
@@ -291,7 +291,7 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_USE);
 
-                string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
+                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
 
                 this.Invoke(new Action(() =>
                 {
@@ -322,7 +322,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_USW);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
+                string newText_Ping = roundtripTime == null || roundtripTime <= 0 ? "X" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_USW.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_USW.Count > jitter_latency_samples_count)
@@ -332,7 +332,7 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_USW);
 
-                string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
+                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
 
                 this.Invoke(new Action(() =>
                 {
@@ -363,7 +363,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_UK);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
+                string newText_Ping = roundtripTime == null || roundtripTime <= 0  ? "X" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_UK.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_UK.Count > jitter_latency_samples_count)
@@ -373,7 +373,7 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_UK);
 
-                string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
+                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
 
                 this.Invoke(new Action(() =>
                 {
@@ -404,7 +404,7 @@ namespace HonestFighterInitiative
             {
                 long? roundtripTime = await PingRoundtrip(StaticData_Const.Ping_Host_DE);
 
-                string newText_Ping = roundtripTime == null ? "NO INFO" : $"{(long)roundtripTime} ms";
+                string newText_Ping = roundtripTime == null || roundtripTime <= 0 ? "X" : $"{(long)roundtripTime} ms";
 
                 StaticData.latencies_DE.Add(Convert.ToDouble(roundtripTime));
                 if (StaticData.latencies_DE.Count > jitter_latency_samples_count)
@@ -414,7 +414,7 @@ namespace HonestFighterInitiative
 
                 double? jitter_value = JitterCalc(ref StaticData.latencies_DE);
 
-                string newText_Jitter = jitter_value == null ? "NO INFO" : $"{string.Format("{0:n2}", jitter_value)}";
+                string newText_Jitter = jitter_value == null ? "X" : $"{string.Format("{0:n2}", jitter_value)}";
 
                 this.Invoke(new Action(() =>
                 {
