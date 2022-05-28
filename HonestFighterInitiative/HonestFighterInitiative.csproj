@@ -101,15 +101,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\LogoEmojiDiscordWeissEye.ico" />
     <Content Include="assets\LogoEmojiDiscordWeissEye.png" />
-    <Content Include="assets\LogoEmojiWithFont.png" />
+    <Content Include="assets\LogoEmojiWithFontEyeWhite.png" />
     <Content Include="LogoEmojiDiscordWeissEye.ico" />
     <None Include="assets\spearlogov2_200x200.png" />
-    <Content Include="LogoEmoji.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="assets\LogoEmoji.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

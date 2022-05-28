@@ -73,9 +73,9 @@ namespace HonestFighterInitiative.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap LogoEmojiWithFont {
+        internal static System.Drawing.Bitmap LogoEmojiWithFontEyeWhite {
             get {
-                object obj = ResourceManager.GetObject("LogoEmojiWithFont", resourceCulture);
+                object obj = ResourceManager.GetObject("LogoEmojiWithFontEyeWhite", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
